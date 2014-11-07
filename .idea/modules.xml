@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/modules/simpleweb/simpleweb.iml" filepath="$PROJECT_DIR$/modules/simpleweb/simpleweb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yoa.iml" filepath="$PROJECT_DIR$/yoa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/yoa-utils/yoa-utils.iml" filepath="$PROJECT_DIR$/modules/yoa-utils/yoa-utils.iml" />
+    </modules>
+  </component>
+</project>
+

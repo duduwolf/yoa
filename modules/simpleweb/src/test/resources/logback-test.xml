@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="APP_NAME" value="taop-utils" />
+	<property name="LOG_HOME" value="${user.home}/.taop" />
+	
+	<!-- 控制台输出日志 -->
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{HH:mm:ss} %-5level [%logger:%line] - &lt;%msg&gt;%n</pattern>
+		</layout>
+	</appender>
+	
+	<!-- 普通文件输出日志 -->
+	<appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${LOG_HOME}/${APP_NAME}.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/${APP_NAME}.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%logger:%line] - &lt;%msg&gt;%n</pattern>
+		</layout>
+	</appender>
+	
+	<!-- 专用错误文件输出日志 -->
+	<appender name="file-error"	class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<OnMismatch>DENY</OnMismatch>
+			<OnMatch>ACCEPT</OnMatch>
+		</filter>
+
+		<File>${LOG_HOME}/${APP_NAME}-error.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_HOME}/${APP_NAME}-error.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>3</MaxIndex>
+		</rollingPolicy>
+		<!-- 根据文件大小策略进行文件输出，超过指定大小对文件备份 -->
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>100MB</MaxFileSize>
+		</triggeringPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5thread %-5level [%logger:%line] - &lt;%msg&gt;%n</pattern>
+		</layout>
+	</appender>
+	
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="stdout" />
+		<appender-ref ref="logfile" />
+		<appender-ref ref="file-error" />
+	</root>
+	
+	<logger name="cn.taop" level="DEBUG" />
+	
+</configuration>
